@@ -5,10 +5,8 @@
  * For more detailed information on multi-project builds, please refer to https://docs.gradle.org/8.14.2/userguide/multi_project_builds.html in the Gradle documentation.
  */
 
-plugins {
-    // Apply the foojay-resolver plugin to allow automatic download of JDKs
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
-}
 
+// See: https://docs.gradle.org/current/userguide/settings_file_basics.html
+// 设置脚本会在任何构建脚本之前求值，这使得它成为启用或配置 全局构建功能 的合适位置，例如插件管理、包含的构建、版本目录等
 rootProject.name = "demo"
 include("app")
