@@ -11,12 +11,12 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace = "com.example.myapplication"
+    namespace = "org.example.application"
     buildFeatures {
         viewBinding = true
     }
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "org.example.application"
         minSdk = 15
         targetSdk = 31
         versionCode = 1
