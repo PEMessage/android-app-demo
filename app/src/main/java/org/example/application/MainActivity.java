@@ -1,6 +1,13 @@
 package org.example.application;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -11,13 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.content.Context;
 import android.util.Log;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
-import java.lang.reflect.Method;
-
 
 import org.example.application.cmd.Cmd;
+import org.example.application.cmd.ClassScanner;
+
 
 
 public class MainActivity extends Activity {
@@ -30,7 +34,22 @@ public class MainActivity extends Activity {
         // setContentView(textView);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        List<Class<?>> cmdClasses = findCmdClasses(this);
+        List<Class<?>> classes = ClassScanner.findClasses(this, "org.example.application");
+
+        // NOTE: due to this error, using forloop way to do this
+        // Error: Call requires API level 24 (current min is 15): java.util.stream.Stream#collect [NewApi]
+        // List<Class<?>> cmdClasses = classes.stream()
+        //         .filter(clazz -> clazz.isAnnotationPresent(Cmd.class))
+        //         .collect(Collectors.toList());
+        //
+        List<Class<?>> cmdClasses = new ArrayList<>();
+        for (Class<?> cls : classes) {
+            if (cls.isAnnotationPresent(Cmd.class)) {
+                Log.d(TAG, "Using Cmd class: " + cls.toString());
+                cmdClasses.add(cls);
+            }
+        }
+
         List<String> classNames = new ArrayList<>();
         for (Class<?> c : cmdClasses) {
             classNames.add(c.getSimpleName());
@@ -54,21 +73,5 @@ public class MainActivity extends Activity {
                 }
             }
         });
-    }
-
-    private List<Class<?>> findCmdClasses(Context context) {
-
-        Log.d(TAG, "findCmdClasses");
-
-        List<Class<?>> list = new ArrayList<>();
-        try {
-            Class<?> demoClass = Class.forName("org.example.application.cmd.Demo");
-            if (demoClass.isAnnotationPresent(Cmd.class)) {
-                list.add(demoClass);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
     }
 }
