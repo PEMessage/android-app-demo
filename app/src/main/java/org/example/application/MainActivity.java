@@ -25,7 +25,7 @@ import org.example.application.cmd.ClassScanner;
 
 
 public class MainActivity extends Activity {
-    private static final String TAG = "DEMO-MainActivity";
+    private static final String TAG = "DEMO-" + MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
