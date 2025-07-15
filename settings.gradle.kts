@@ -8,5 +8,25 @@
 
 // See: https://docs.gradle.org/current/userguide/settings_file_basics.html
 // 设置脚本会在任何构建脚本之前求值，这使得它成为启用或配置 全局构建功能 的合适位置，例如插件管理、包含的构建、版本目录等
+
+// SELF NOTE: (might be wrong) but it don't like top-level build.gradle.kts,
+// it using different recvier(Settings) and dont affect subproject build.gradle.kts
+
+// See: https://docs.gradle.org/current/userguide/writing_settings_files.html#settings_script_structure
+pluginManagement {
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
 rootProject.name = "demo"
 include("app")
