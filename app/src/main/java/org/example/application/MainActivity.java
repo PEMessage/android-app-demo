@@ -22,6 +22,7 @@ import android.util.Log;
 import org.example.application.cmd.Cmd;
 import org.example.application.cmd.ClassScanner;
 
+import org.example.Library;
 
 
 public class MainActivity extends Activity {
@@ -41,7 +42,10 @@ public class MainActivity extends Activity {
         // List<Class<?>> cmdClasses = classes.stream()
         //         .filter(clazz -> clazz.isAnnotationPresent(Cmd.class))
         //         .collect(Collectors.toList());
-        //
+
+        Library demoLib = new Library();
+        demoLib.someLibraryMethod();
+
         List<Class<?>> cmdClasses = new ArrayList<>();
         for (Class<?> cls : classes) {
             if (cls.isAnnotationPresent(Cmd.class)) {
