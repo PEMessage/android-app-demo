@@ -9,13 +9,14 @@ junit = "4.13.2"
 # the Gradle Plugin version may be incompatible with the Gradle Version,
 # you can check the compatibility there: https://developer.android.com/build/releases/gradle-plugin#updating-gradle
 agp = "8.1.0"
+jbbp = "3.0.1"
 
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { module = "junit:junit", version.ref = "junit" }
+jbbp = { module = "com.igormaznitsa:jbbp", version.ref = "jbbp" }
 
 
 [plugins]
-
 android-application = { id = "com.android.application", version.ref = "agp" }
