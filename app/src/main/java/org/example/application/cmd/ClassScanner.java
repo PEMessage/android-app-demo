@@ -16,6 +16,9 @@ public class ClassScanner {
     // See: https://stackoverflow.com/questions/7627742/is-it-possible-to-scan-the-android-classpath-for-annotations
     // See: https://mindtherobot.com/blog/737/android-hacks-scan-android-classpath/
     // See: https://stackoverflow.com/a/15892032
+
+    // TOOD: using anotation processor to do this
+    @SuppressWarnings("deprecation")
     public static String[] findClassesName(Context context, String packageName) {
         ArrayList<String> classes = new ArrayList<String>();
         try {
