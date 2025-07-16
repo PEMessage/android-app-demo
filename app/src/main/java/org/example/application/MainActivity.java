@@ -39,20 +39,12 @@ public class MainActivity extends Activity {
 
         // NOTE: due to this error, using forloop way to do this
         // Error: Call requires API level 24 (current min is 15): java.util.stream.Stream#collect [NewApi]
-        // List<Class<?>> cmdClasses = classes.stream()
-        //         .filter(clazz -> clazz.isAnnotationPresent(Cmd.class))
-        //         .collect(Collectors.toList());
+        List<Class<?>> cmdClasses = classes.stream()
+                .filter(clazz -> clazz.isAnnotationPresent(Cmd.class))
+                .collect(Collectors.toList());
 
         Library demoLib = new Library();
         demoLib.someLibraryMethod();
-
-        List<Class<?>> cmdClasses = new ArrayList<>();
-        for (Class<?> cls : classes) {
-            if (cls.isAnnotationPresent(Cmd.class)) {
-                Log.d(TAG, "Using Cmd class: " + cls.toString());
-                cmdClasses.add(cls);
-            }
-        }
 
         List<String> classNames = new ArrayList<>();
         for (Class<?> c : cmdClasses) {
