@@ -29,5 +29,11 @@ dependencyResolutionManagement {
     }
 }
 
+plugins {
+    // Apply the foojay-resolver plugin to allow automatic download of JDKs
+    // https://docs.gradle.org/current/userguide/toolchains.html#sec:provisioning
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
+}
+
 rootProject.name = "demo"
 include("app", "lib")

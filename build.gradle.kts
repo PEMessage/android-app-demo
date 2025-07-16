@@ -17,5 +17,13 @@
 plugins {
     // id("com.android.application") version "8.1.0" apply false
     alias(libs.plugins.android.application) apply false
+    java
+}
+
+// See: https://developer.android.com/build/jdks?hl=zh-cn#toolchain
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
