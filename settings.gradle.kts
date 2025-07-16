@@ -36,4 +36,4 @@ plugins {
 }
 
 rootProject.name = "demo"
-include("app", "lib")
+include("app", "lib", "cli")
