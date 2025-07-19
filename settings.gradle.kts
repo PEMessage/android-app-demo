@@ -41,3 +41,6 @@ include("lib", "cli")
 // See: https://docs.gradle.org/8.14.2/userguide/multi_project_builds.html#multi_project_layout
 include("classscanner")
 project(":classscanner").projectDir = File("app/classscanner/")
+
+include("helloworld")
+project(":helloworld").projectDir = File("app/helloworld/")
