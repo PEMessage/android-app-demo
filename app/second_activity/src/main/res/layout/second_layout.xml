@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/textview_2"
+        android:id="@+id/textview_2_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello World from 2nd"
+    />
+    <Button
+        android:id="@+id/button_2_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
     />
 </LinearLayout>
