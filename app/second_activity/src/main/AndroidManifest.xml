@@ -13,8 +13,13 @@
         </activity>
         <activity android:exported="true" android:name=".SecondActivity">
             <intent-filter>
+                <!-- 每个Intent中只能指定一个action ，但却能指定多个category 。目前我们的Intent中只有一个默认的category -->
                 <action android:name="org.example.RUN_SEC_ACTIVITY" />
+                <!-- ALL logic, all category must be add to be able to called -->
                 <category android:name="android.intent.category.DEFAULT" />
+                <!-- it seem like we can't delete default even if MY_CATEGORY was added -->
+                <!-- otherwise, still can't find this activity -->
+                <category android:name="org.example.MY_CATEGORY"/>
             </intent-filter>
         </activity>
     </application>

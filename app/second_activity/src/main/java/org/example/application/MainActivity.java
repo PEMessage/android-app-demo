@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("org.example.RUN_SEC_ACTIVITY"); // implict intent to start Activity
+                intent.addCategory("org.example.MY_CATEGORY");
                 startActivity(intent); // Declare in Context.startActivity
             }
         });
