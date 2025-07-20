@@ -47,3 +47,6 @@ project(":helloworld").projectDir = File("app/helloworld/")
 
 include("helloworld_layout")
 project(":helloworld_layout").projectDir = File("app/helloworld_layout/")
+
+include("second_activity")
+project(":second_activity").projectDir = File("app/second_activity/")
