@@ -1,5 +1,6 @@
 package org.example.application;
 
+import android.net.Uri;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -28,13 +29,24 @@ public class MainActivity extends Activity {
         });
 
         Button button_2 = (Button)findViewById(R.id.button_2);
-        button_2.setText("implict intent to start 2nd activity");
+        button_2.setText("implicit intent to start 2nd activity");
         button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("org.example.RUN_SEC_ACTIVITY"); // implict intent to start Activity
+                Intent intent = new Intent("org.example.RUN_SEC_ACTIVITY"); // implicit intent to start Activity
                 intent.addCategory("org.example.MY_CATEGORY");
                 startActivity(intent); // Declare in Context.startActivity
+            }
+        });
+
+        Button button_3 = (Button)findViewById(R.id.button_3);
+        button_3.setText("predefine implicit Intent.ACTION_VIEW for data (https://www.baidu.com)");
+        button_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW); // predefine implicit
+                intent.setData(Uri.parse("http://www.baidu.com"));
+                startActivity(intent);
             }
         });
     }
