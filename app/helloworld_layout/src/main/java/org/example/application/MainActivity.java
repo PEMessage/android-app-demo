@@ -6,8 +6,9 @@ import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.Toast;
-import android.view.View;
 
+import android.view.View;
+import android.view.Menu;
 
 public class MainActivity extends Activity {
     @Override
@@ -22,5 +23,11 @@ public class MainActivity extends Activity {
                 Toast.makeText(MainActivity.this, "You clicked Button 1", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.first_menu, menu);
+        return true; // set to false allow you to disable menu
     }
 }

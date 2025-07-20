@@ -1,0 +1,17 @@
+
+<!-- This must be in `res/menu` dir, not `res/layout` -->
+<!-- Otherwise will report error -->
+<!--   import android.widget.menu; -->
+<!--                        ^ -->
+<!--     symbol:   class menu -->
+<!--     location: package android.widget -->
+<!-- NOTE: (res -> android.widget) and (menu -> android.menu) ???? -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add_item"
+        android:title="Add"/>
+    <item
+        android:id="@+id/remove_item"
+        android:title="Remove"/>
+</menu>
