@@ -44,3 +44,6 @@ project(":classscanner").projectDir = File("app/classscanner/")
 
 include("helloworld")
 project(":helloworld").projectDir = File("app/helloworld/")
+
+include("helloworld_layout")
+project(":helloworld_layout").projectDir = File("app/helloworld_layout/")
