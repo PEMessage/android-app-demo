@@ -9,6 +9,12 @@
         android:layout_height="wrap_content"
         android:text="Hello World"
     />
+    <TextView
+        android:id="@+id/textview_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="onActivityResult:"
+    />
     <Button
         android:id="@+id/button_1"
         android:layout_width="match_parent"
@@ -31,6 +37,11 @@
     />
     <Button
         android:id="@+id/button_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+    <Button
+        android:id="@+id/button_6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
     />

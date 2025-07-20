@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.Toast;
-import android.widget.Toast;
+import android.widget.TextView;
 import android.view.View;
 
 import android.content.Intent;
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
         });
 
         Button button_5 = (Button)findViewById(R.id.button_5);
-        button_5.setText("Pass data by intent(putExtra)");
+        button_5.setText("pass data by intent.putExtra(...)");
         button_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,5 +71,34 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        Button button_6 = (Button)findViewById(R.id.button_6);
+        button_6.setText("startActivityForResult(intent, 1) and get return by onActivityResult(...)");
+        button_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class); // predefine implicit
+                startActivityForResult(intent, 1); // 2nd args is `request code` must be uniq
+            }
+        });
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+            if (resultCode == RESULT_OK) {
+                String returnedData = data.getStringExtra("data_return");
+                TextView textview_2 = (TextView)findViewById(R.id.textview_2);
+                textview_2.setText(
+                    "onActivityResult:"
+                    + "intent.getStringExtra(\"data_return\"): " + returnedData
+                );
+            }
+            break;
+            default:
+        }
+    }
+
 }

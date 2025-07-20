@@ -11,6 +11,7 @@ import android.view.View;
 import android.content.Intent;
 
 public class SecondActivity extends Activity {
+    static int flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,21 @@ public class SecondActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish(); // close this Activity
+            }
+        });
+
+        Button button_2_2 = (Button)findViewById(R.id.button_2_2);
+        button_2_2.setText("finish with setResult(...) putExtra(...," + flag + ")");
+        button_2_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // a empty intent, not link to any context or class(explicit)
+                // only used for putExtra to pass data(bundle)
+                Intent intent = new Intent(); 
+                flag = (flag + 1) % 3;
+                intent.putExtra("data_return", "Hello MainActivity " + flag);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
