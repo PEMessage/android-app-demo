@@ -49,5 +49,16 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        Button button_4 = (Button)findViewById(R.id.button_4);
+        button_4.setText("predefine implicit Intent.ACTION_DAIL");
+        button_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL); // predefine implicit
+                intent.setData(Uri.parse("tel:10086")); // no phone for wayland(so will crash, but work on real phone)
+                startActivity(intent);
+            }
+        });
     }
 }
