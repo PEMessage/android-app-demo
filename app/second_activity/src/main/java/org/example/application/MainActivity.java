@@ -60,5 +60,16 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        Button button_5 = (Button)findViewById(R.id.button_5);
+        button_5.setText("Pass data by intent(putExtra)");
+        button_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class); // predefine implicit
+                intent.putExtra("extra_data", "This msg is from MainActivity");
+                startActivity(intent);
+            }
+        });
     }
 }
