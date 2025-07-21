@@ -46,6 +46,7 @@ val projects = listOf(
     "second_activity" to "app/second_activity/",
     "sharedpreferences" to "app/sharedpreferences/",
     "system_properties" to "app/system_properties/",
+    "settings_info" to "app/settings_info/",
 )
 
 // See: https://docs.gradle.org/8.14.2/userguide/multi_project_builds.html#multi_project_layout
