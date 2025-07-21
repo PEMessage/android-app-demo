@@ -41,8 +41,9 @@ include("lib", "cli")
 val projects = listOf(
     "classscanner" to "app/classscanner/",
     "helloworld" to "app/helloworld/",
-    "helloworld_layout" to "app/helloworld_layout/",
-    "second_activity" to "app/second_activity/"
+    // "helloworld_layout" to "app/helloworld_layout/",
+    "menu_demo" to "app/menu_demo/",
+    "second_activity" to "app/second_activity/",
 )
 
 // See: https://docs.gradle.org/8.14.2/userguide/multi_project_builds.html#multi_project_layout
