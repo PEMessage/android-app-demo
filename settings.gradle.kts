@@ -38,15 +38,15 @@ plugins {
 rootProject.name = "demo"
 include("lib", "cli")
 
+val projects = listOf(
+    "classscanner" to "app/classscanner/",
+    "helloworld" to "app/helloworld/",
+    "helloworld_layout" to "app/helloworld_layout/",
+    "second_activity" to "app/second_activity/"
+)
+
 // See: https://docs.gradle.org/8.14.2/userguide/multi_project_builds.html#multi_project_layout
-include("classscanner")
-project(":classscanner").projectDir = File("app/classscanner/")
-
-include("helloworld")
-project(":helloworld").projectDir = File("app/helloworld/")
-
-include("helloworld_layout")
-project(":helloworld_layout").projectDir = File("app/helloworld_layout/")
-
-include("second_activity")
-project(":second_activity").projectDir = File("app/second_activity/")
+projects.forEach { (name, path) ->
+    include(":$name")
+    project(":$name").projectDir = File(path)
+}
