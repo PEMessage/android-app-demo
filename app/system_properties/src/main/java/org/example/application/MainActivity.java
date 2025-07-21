@@ -3,7 +3,9 @@ package org.example.application;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import android.widget.TextView;
+import android.widget.ScrollView;
 import android.view.Window;
 
 import java.util.Properties;
@@ -30,7 +32,10 @@ public class MainActivity extends Activity {
 
         TextView textView = new TextView(this);
         textView.setText(propertiesText.toString());
+
+        ScrollView scrollView = new ScrollView(this);
+        scrollView.addView(textView);
         
-        setContentView(textView);
+        setContentView(scrollView);
     }
 }
