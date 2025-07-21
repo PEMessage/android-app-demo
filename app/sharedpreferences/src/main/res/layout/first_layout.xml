@@ -3,16 +3,32 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/textview_1"
+
+    <EditText
+        android:id="@+id/editTextMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World"
-    />
+        android:hint="Enter your message"
+        android:inputType="text"/>
+
     <Button
-        android:id="@+id/button_1"
+        android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button 1"
-        />
+        android:layout_marginTop="16dp"
+        android:text="Save Message"/>
+
+    <Button
+        android:id="@+id/buttonLoad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Load Message"/>
+
+    <Button
+        android:id="@+id/buttonFinish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Finish"/>
 </LinearLayout>
