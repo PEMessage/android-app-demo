@@ -12,9 +12,7 @@ plugins {
 android {
     compileSdk = 33
     namespace = "org.example.application"
-    buildFeatures {
-        viewBinding = true
-    }
+
     defaultConfig {
         applicationId = "org.example.application"
         minSdk = 24
@@ -22,9 +20,17 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = File("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 }
 

@@ -12,8 +12,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // Get results from native code
+        String message = NativeWrapper.getMessageFromNative();
+        int sum = NativeWrapper.addNumbers(5, 3);
+
         TextView textView = new TextView(this);
-        textView.setText("Hello world");
+        textView.setText(message + "\nSum of 5 + 3 = " + sum);
         setContentView(textView);
     }
 }
