@@ -47,6 +47,7 @@ val projects = listOf(
     "sharedpreferences" to "app/sharedpreferences/",
     "system_properties" to "app/system_properties/",
     "settings_info" to "app/settings_info/",
+    "heap_info" to "app/heap_info/",
     "adb_args" to "app/adb_args/",
 )
 
