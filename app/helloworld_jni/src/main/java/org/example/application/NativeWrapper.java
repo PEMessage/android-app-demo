@@ -6,6 +6,6 @@ public class NativeWrapper {
         System.loadLibrary("native-lib");
     }
 
-    public static native String getMessageFromNative();
+    public static native String getMessage();
     public static native int addNumbers(int a, int b);
 }

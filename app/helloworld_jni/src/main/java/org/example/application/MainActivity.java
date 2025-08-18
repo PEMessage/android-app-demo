@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // Get results from native code
-        String message = NativeWrapper.getMessageFromNative();
+        String message = NativeWrapper.getMessage();
         int sum = NativeWrapper.addNumbers(5, 3);
 
         TextView textView = new TextView(this);

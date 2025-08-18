@@ -3,7 +3,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_org_example_application_NativeWrapper_getMessageFromNative(JNIEnv* env, jclass clazz) {
+Java_org_example_application_NativeWrapper_getMessage(JNIEnv* env, jclass clazz) {
     std::string hello = "Hello from Native C++!";
     return env->NewStringUTF(hello.c_str());
 }
