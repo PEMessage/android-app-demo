@@ -29,5 +29,8 @@ android {
 }
 
 dependencies {
+    // See: https://developer.android.com/jetpack/androidx/releases/appcompat?hl=zh-cn 
+    // 1.7.1 require API34
+    implementation("androidx.appcompat:appcompat:1.6.1")
     implementation(project(":lib"))
 }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- NOTE: we have to add theme, otherwise crash -->
+    <!-- Caused by: java.lang.IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity. -->
     <application
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity android:exported="true" android:name=".MainActivity">
