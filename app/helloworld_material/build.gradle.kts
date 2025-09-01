@@ -32,5 +32,7 @@ dependencies {
     // See: https://developer.android.com/jetpack/androidx/releases/appcompat?hl=zh-cn 
     // 1.7.1 require API34
     implementation("androidx.appcompat:appcompat:1.6.1")
+    // See: https://developer.android.com/develop/ui/views/theming/look-and-feel?hl=zh-cn
+    implementation("com.google.android.material:material:1.9.0")
     implementation(project(":lib"))
 }
