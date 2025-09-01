@@ -4,7 +4,12 @@
     <!-- Caused by: java.lang.IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity. -->
 
     <!-- Update: using runtime method instead of static method -->
+    <!-- if we put style in AndroidManifest it's call background style -->
+    <!--    https://developer.android.com/develop/ui/views/theming/themes?hl=zh-cn#Theme -->
+    <!-- android:theme will inherit in activity tree -->
+    <!-- style="xxx" will not inherit -->
     <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" -->
+
     <application
         android:allowBackup="true"
         android:supportsRtl="true">

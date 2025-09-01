@@ -5,7 +5,6 @@ import android.widget.TextView;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.R;
 
 import java.util.AbstractMap;
 import java.util.Arrays;
@@ -19,10 +18,14 @@ public class MainActivity extends AppCompatActivity {
     // Map: A set of Key-Value Pair
     // Map.Entry: A Single KeyValue Pair
     private static final List<Map.Entry<Integer, String>> THEMES = Arrays.asList(
-        new AbstractMap.SimpleEntry<>(R.style.Theme_AppCompat_Light, "Theme_AppCompat_Light"),
-        new AbstractMap.SimpleEntry<>(R.style.Theme_AppCompat_DayNight, "Theme_AppCompat_DayNight"),
-        new AbstractMap.SimpleEntry<>(R.style.Theme_AppCompat_DayNight_DarkActionBar, "Theme_AppCompat_DarkActionBar"),
-        new AbstractMap.SimpleEntry<>(R.style.Theme_AppCompat_DayNight_NoActionBar, "Theme_AppCompat_NoActionBar")
+        new AbstractMap.SimpleEntry<>(androidx.appcompat.R.style.Theme_AppCompat_Light,
+            "Theme_AppCompat_Light"),
+        new AbstractMap.SimpleEntry<>( androidx.appcompat.R.style.Theme_AppCompat_DayNight,
+            "Theme_AppCompat_DayNight"),
+        new AbstractMap.SimpleEntry<>(androidx.appcompat.R.style.Theme_AppCompat_DayNight_DarkActionBar,
+            "Theme_AppCompat_DarkActionBar"),
+        new AbstractMap.SimpleEntry<>(androidx.appcompat.R.style.Theme_AppCompat_DayNight_NoActionBar,
+            "Theme_AppCompat_NoActionBar")
     );
 
     @Override
