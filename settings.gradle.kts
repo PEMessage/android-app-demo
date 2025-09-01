@@ -44,6 +44,7 @@ val projects = listOf(
     "helloworld_layout" to "app/helloworld_layout/",
     "helloworld_jni" to "app/helloworld_jni/",
     "helloworld_compatactivity" to "app/helloworld_compatactivity/",
+    "helloworld_material" to "app/helloworld_material/",
     "menu_demo" to "app/menu_demo/",
     "second_activity" to "app/second_activity/",
     "sharedpreferences" to "app/sharedpreferences/",
