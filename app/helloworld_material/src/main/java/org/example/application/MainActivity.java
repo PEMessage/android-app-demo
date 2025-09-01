@@ -24,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
         new AbstractMap.SimpleEntry<>(com.google.android.material.R.style.Theme_MaterialComponents_Light,
             "Theme_MaterialComponents_Light"),
         new AbstractMap.SimpleEntry<>(com.google.android.material.R.style.Theme_MaterialComponents_DayNight,
-            "Theme_MaterialComponents_DayNight")
+            "Theme_MaterialComponents_DayNight"),
+        new AbstractMap.SimpleEntry<>(com.google.android.material.R.style.Theme_Material3_DynamicColors_Light,
+            "Theme_Material3_DynamicColors_Light"),
+        new AbstractMap.SimpleEntry<>(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight,
+            "Theme_Material3_DynamicColors_DayNight")
     );
 
     @Override
