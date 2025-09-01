@@ -8,7 +8,8 @@ junit = "4.13.2"
 # See: https://stackoverflow.com/questions/76620079/android-gradle-plugin-8-0-2-plugin-id-com-android-application-version-8
 # the Gradle Plugin version may be incompatible with the Gradle Version,
 # you can check the compatibility there: https://developer.android.com/build/releases/gradle-plugin#updating-gradle
-agp = "8.1.0"
+# Also Check: https://mvnrepository.com/artifact/com.android.tools.build/gradle
+agp = "8.12.1"
 
 
 [libraries]
