@@ -10,7 +10,7 @@ junit = "4.13.2"
 # you can check the compatibility there: https://developer.android.com/build/releases/gradle-plugin#updating-gradle
 # Also Check: https://mvnrepository.com/artifact/com.android.tools.build/gradle
 agp = "8.12.1"
-
+kotlin = "1.9.24"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -18,5 +18,5 @@ junit = { module = "junit:junit", version.ref = "junit" }
 
 
 [plugins]
-
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
