@@ -7,7 +7,8 @@
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    // alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.android") version "1.7.20" // Jetpack compose 2024.06.00 use 1.7.20
 }
 
 android {
@@ -35,5 +36,4 @@ android {
 
 dependencies {
     implementation(project(":lib"))
-    implementation("androidx.core:core-ktx:1.10.1") // 1.12.0 need API34, and 1.11.0 don't have stable version
 }
