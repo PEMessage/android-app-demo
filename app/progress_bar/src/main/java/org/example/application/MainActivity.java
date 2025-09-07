@@ -26,15 +26,10 @@ public class MainActivity extends Activity {
         TextView textView = new TextView(this);
         textView.setText("Hello world");
 
-        // Create button
+        // Create button - using lambda for onClickListener
         Button button = new Button(this);
         button.setText("Run Heavy Task");
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                runHeavyTask();
-            }
-        });
+        button.setOnClickListener(v -> runHeavyTask());
 
         // Add views to layout
         layout.addView(textView);
@@ -51,30 +46,21 @@ public class MainActivity extends Activity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        // Create and start new thread for heavy task
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Simulate heavy task (sleep for 3 seconds)
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        // Create and start new thread for heavy task - using lambda for Runnable
+        new Thread(() -> {
+            // Simulate heavy task (sleep for 3 seconds)
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Dismiss progress dialog on main thread - using lambda for Runnable
+            mainHandler.post(() -> {
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
-
-                Dismiss progress dialog on main thread
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (progressDialog != null && progressDialog.isShowing()) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                });
-            }
+            });
         }).start();
     }
 }
