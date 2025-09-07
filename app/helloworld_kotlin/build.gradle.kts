@@ -7,8 +7,7 @@
 
 plugins {
     alias(libs.plugins.android.application)
-    // alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.android") version "1.7.20" // Jetpack compose 2024.06.00 use 1.7.20
+    alias(libs.plugins.kotlin.android)
 }
 
 android {

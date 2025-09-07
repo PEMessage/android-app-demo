@@ -17,7 +17,8 @@
 plugins {
     // id("com.android.application") version "8.1.0" apply false
     alias(libs.plugins.android.application) apply false
-    // alias(libs.plugins.kotlin.android) apply false
+    // for kotlin, we must specific it in root build.gradle.kts, see helloworld_jetpack_compose for more
+    alias(libs.plugins.kotlin.android) apply false 
     java
 }
 

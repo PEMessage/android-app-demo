@@ -10,7 +10,14 @@
 
 plugins {
     alias(libs.plugins.android.application)
-    id("org.jetbrains.kotlin.android") version "1.8.10"
+    // Note: we could not used kotlin.android in subproject independ, which will casue 'compose = true' not work
+    // See: https://issuetracker.google.com/issues/295349264
+    // We must apply it in root build.gradle.kts(which mean all project only have one kotlin version)
+    // id("org.jetbrains.kotlin.android") version "1.8.10"
+    //
+    // Even if we pass build, we get runtime error
+    // NoSuchMethodError: No static method setContent$default ...
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -37,7 +44,8 @@ android {
     }
     composeOptions {
         // See: https://developer.android.google.cn/jetpack/androidx/releases/compose-kotlin?hl=zh-cn#kts
-        kotlinCompilerVersion = "1.4.2"
+        // must be use version corespone to libs.plugins.kotlin.android
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
 }
 
@@ -46,7 +54,18 @@ dependencies {
 
     // See: https://developer.android.com/develop/ui/compose/bom/bom-mapping?hl=zh-cn
     // Jetpack compose library version control by BOM
-    val composeBom = platform("androidx.compose:compose-bom:2023.06.00")
+
+    // We must used 2023.06.01 instead of 2023.06.00
+    // In ./gradlew :helloworld_jetpack_compose:dependencies, some compoent will depend kotlin-stdlib 1.8.10
+    // but AGP will force you to use 1.7.20, 2023.06.01 unify it to use 1.8.10
+    //
+    // If we use 1.7.20 in bom:2023.06.00 at same time, will cause compile error
+    // Duplicate class
+    //     > Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules kotlin-stdlib-1.8.
+    // 10.jar -> kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and kotlin-stdlib-jdk8-
+    // 1.7.20.jar -> kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
+    //
+    val composeBom = platform("androidx.compose:compose-bom:2023.06.01")
     implementation(composeBom)
 
     // // See: https://developer.android.com/develop/ui/compose/setup?hl=zh-cn#kotlin

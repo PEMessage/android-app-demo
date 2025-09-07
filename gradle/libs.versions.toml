@@ -13,7 +13,7 @@ agp = "8.12.1"
 
 # Due to jetpack compose bind to specific kotlin version, we use legacy way
 # See: https://developer.android.com/jetpack/androidx/releases/compose-kotlin?hl=zh-cn#pre-release_kotlin_compatibility
-# kotlin = "1.9.24"
+kotlin = "1.8.10"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -22,4 +22,4 @@ junit = { module = "junit:junit", version.ref = "junit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-# kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
