@@ -5,10 +5,12 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.14.2/userguide/building_java_projects.html in the Gradle documentation.
  */
 
+// Thanks to project: https://github.com/im-o/jetpack-compose-clean-architecture/blob/ecea30212b228ed88e2a5f38b55ea4c9b107a246/core/build.gradle.kts#L67
+// for provide all version reference
+
 plugins {
     alias(libs.plugins.android.application)
-    // alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.android") version "1.7.20" // Jetpack compose 2024.06.00 use 1.7.20
+    id("org.jetbrains.kotlin.android") version "1.8.10"
 }
 
 android {
@@ -16,6 +18,7 @@ android {
     namespace = "org.example.application"
     buildFeatures {
         viewBinding = true
+        compose = true
     }
     defaultConfig {
         applicationId = "org.example.application"
@@ -32,8 +35,23 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    composeOptions {
+        // See: https://developer.android.google.cn/jetpack/androidx/releases/compose-kotlin?hl=zh-cn#kts
+        kotlinCompilerVersion = "1.4.2"
+    }
 }
 
 dependencies {
     implementation(project(":lib"))
+
+    // See: https://developer.android.com/develop/ui/compose/bom/bom-mapping?hl=zh-cn
+    // Jetpack compose library version control by BOM
+    val composeBom = platform("androidx.compose:compose-bom:2023.06.00")
+    implementation(composeBom)
+
+    // // See: https://developer.android.com/develop/ui/compose/setup?hl=zh-cn#kotlin
+    // implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.activity:activity-compose:1.7.2")
+
 }

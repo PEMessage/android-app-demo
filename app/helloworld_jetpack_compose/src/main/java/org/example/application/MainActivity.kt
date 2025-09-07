@@ -1,16 +1,22 @@
 package org.example.application
 
-import android.app.Activity
 import android.os.Bundle
-import android.view.Window
-import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 
-class MainActivity : Activity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val textView = TextView(this)
-        textView.text = "Hello world"
-        setContentView(textView)
+        setContent {
+            HelloWorldApp()
+        }
     }
 }
+
+@Composable
+fun HelloWorldApp() {
+    Text(text = "Hello, World!")
+}
+
