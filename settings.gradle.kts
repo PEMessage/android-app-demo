@@ -42,6 +42,7 @@ val projects = listOf(
     "classscanner" to "app/classscanner/",
     "helloworld" to "app/helloworld/",
     "helloworld_layout" to "app/helloworld_layout/",
+    "helloworld_fragment" to "app/helloworld_fragment/",
     "helloworld_jni" to "app/helloworld_jni/",
     "helloworld_compatactivity" to "app/helloworld_compatactivity/",
     "helloworld_material" to "app/helloworld_material/",
