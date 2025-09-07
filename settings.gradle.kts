@@ -54,6 +54,7 @@ val projects = listOf(
     "settings_info" to "app/settings_info/",
     "heap_info" to "app/heap_info/",
     "adb_args" to "app/adb_args/",
+    "progress_bar" to "app/progress_bar/",
 )
 
 // See: https://docs.gradle.org/8.14.2/userguide/multi_project_builds.html#multi_project_layout
