@@ -24,6 +24,8 @@ public class ItemListFragment extends Fragment {
                              Bundle savedInstanceState) {
         ListView listView = new ListView(getActivity());
 
+        listView.setBackgroundColor(0xFFE4E4E4);
+
         String[] items = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
         listView.setAdapter(new ArrayAdapter<>(
             getActivity(),
