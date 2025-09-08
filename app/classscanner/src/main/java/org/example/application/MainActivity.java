@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         List<Class<?>> classes = ClassScanner.findClasses(this, "org.example.application");
+        List<Method> methods = ClassScanner.findMethods(this, "org.example.application");
 
         // NOTE: due to this error, using forloop way to do this
         // Error: Call requires API level 24 (current min is 15): java.util.stream.Stream#collect [NewApi]
@@ -43,31 +44,39 @@ public class MainActivity extends Activity {
                 .filter(clazz -> clazz.isAnnotationPresent(Cmd.class))
                 .collect(Collectors.toList());
 
+        List<Method> cmdMethods = methods.stream()
+                .filter(method -> method.isAnnotationPresent(Cmd.class))
+                .collect(Collectors.toList());
+
         Library demoLib = new Library();
         demoLib.someLibraryMethod();
 
-        List<String> classNames = new ArrayList<>();
+        List<String> allNames = new ArrayList<>();
         for (Class<?> c : cmdClasses) {
-            classNames.add(c.getSimpleName());
+            allNames.add(c.getName());
+        }
+
+        for (Method c : cmdMethods) {
+            allNames.add(c.getDeclaringClass().getName() + "." + c.getName());
         }
 
         ListView listView = new ListView(this);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allNames);
         listView.setAdapter(adapter);
         setContentView(listView);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
-                Class<?> clazz = cmdClasses.get(position);
-                try {
-                    Object obj = clazz.newInstance();
-                    Method action = clazz.getMethod("action");
-                    action.invoke(obj);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        // listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //     @Override
+        //     public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
+        //         Class<?> clazz = cmdClasses.get(position);
+        //         try {
+        //             Object obj = clazz.newInstance();
+        //             Method action = clazz.getMethod("action");
+        //             action.invoke(obj);
+        //         } catch (Exception e) {
+        //             e.printStackTrace();
+        //         }
+        //     }
+        // });
     }
 }

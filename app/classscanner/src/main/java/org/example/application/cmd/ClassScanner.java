@@ -2,8 +2,13 @@ package org.example.application.cmd;
 
 import java.util.Enumeration;
 import java.util.ArrayList;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import java.lang.reflect.Method;
+import java.io.IOException;
 
 import dalvik.system.DexFile;
 
@@ -19,7 +24,7 @@ public class ClassScanner {
 
     // TOOD: using anotation processor to do this
     @SuppressWarnings("deprecation")
-    public static String[] findClassesName(Context context, String packageName) {
+    public static List<String> findClassesName(Context context, String packageName) {
         ArrayList<String> classes = new ArrayList<String>();
         try {
             DexFile df = new DexFile(context.getPackageCodePath());
@@ -33,13 +38,13 @@ public class ClassScanner {
             e.printStackTrace();
         }
 
-        return classes.toArray(new String[classes.size()]);
+        return classes;
     }
 
     public static List<Class<?>> findClasses(Context context, String packageName) {
         Log.d(TAG,"Enter findCmdClasses");
 
-        final String[] classes = ClassScanner.findClassesName(context, packageName);
+        final List<String> classes = ClassScanner.findClassesName(context, packageName);
         for(String clz: classes) {
             Log.d(TAG,"Founded: " + clz);
         }
@@ -56,5 +61,25 @@ public class ClassScanner {
         Log.d(TAG,"Exit findCmdClasses");
         return list;
     }
+
+    public static List<Method> findMethods(Context context, String packageName) {
+        Log.d(TAG, "Enter findMethods");
+
+        // Using Stream API to find all methods in classes within the package
+        List<Method> methods = findClasses(context, packageName).stream()
+            .flatMap(cls -> {
+                try {
+                    return Arrays.stream(cls.getDeclaredMethods());
+                } catch (Exception e) {
+                    Log.w(TAG, "Failed to get methods from class: " + cls.getName(), e);
+                    return Stream.empty();
+                }
+            })
+        .collect(Collectors.toList());
+
+        Log.d(TAG, "Exit findMethods - Found " + methods.size() + " methods");
+        return methods;
+    }
+
 
 }
