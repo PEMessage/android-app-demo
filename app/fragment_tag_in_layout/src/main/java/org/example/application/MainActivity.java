@@ -12,7 +12,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(androidx.appcompat.R.style.Theme_AppCompat_Light);
         setContentView(R.layout.first_layout); // Activity(View) - setContentView -> R.layout.XXX
     }
 }

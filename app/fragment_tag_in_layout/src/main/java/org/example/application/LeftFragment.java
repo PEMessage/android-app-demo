@@ -13,7 +13,9 @@ public class LeftFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.left_fragment, container, false);
+        // If attachToRoot is false, the parent will become object to provide LayoutParams, or null, if we dont need it
+        // See: https://developer.android.com/reference/android/view/LayoutInflater#inflate(int,%20android.view.ViewGroup,%20boolean)
+        View view = inflater.inflate(R.layout.left_fragment, null, false);
         return view;
     }
 }
