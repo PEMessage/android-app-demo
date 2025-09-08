@@ -13,7 +13,7 @@ android {
     compileSdk = 33
     namespace = "org.example.application"
     buildFeatures {
-        viewBinding = true
+        // viewBinding = true
     }
     defaultConfig {
         applicationId = "org.example.application"
@@ -30,4 +30,6 @@ android {
 
 dependencies {
     implementation(project(":lib"))
+    // implementation("androidx.fragment:fragment:1.5.1") // 1.7.1 need API34, 1.6.2 will have conflict kotlin stdlib by it's own???
+    // implementation("androidx.appcompat:appcompat:1.6.1")
 }

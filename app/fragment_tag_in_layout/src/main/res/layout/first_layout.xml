@@ -1,18 +1,26 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/textview_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World"
-    />
-    <Button
-        android:id="@+id/button_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button 1"
-        />
+
+    <!-- NOTE: 0dp must be match android:orientation, or it will not display -->
+    <!-- width 0dp -> horizontal -->
+    <!-- height 0dp -> veritical -->
+    
+    <!-- android:name will act as a subentry point(similar to android:name in AndroidManifest.xml) -->
+    <fragment
+        android:id="@+id/left_fragment"
+        android:name="org.example.application.LeftFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" />
+
+    <fragment
+        android:id="@+id/right_fragment"
+        android:name="org.example.application.RightFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
 </LinearLayout>
