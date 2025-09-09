@@ -40,6 +40,7 @@ include("lib", "cli")
 
 val projects = listOf(
     "classscanner" to "app/classscanner/",
+    "classscanner_fragment" to "app/classscanner_fragment/",
     "helloworld" to "app/helloworld/",
     "helloworld_layout" to "app/helloworld_layout/",
     "helloworld_fragment" to "app/helloworld_fragment/",
