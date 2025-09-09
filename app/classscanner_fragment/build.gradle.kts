@@ -30,4 +30,5 @@ android {
 
 dependencies {
     implementation(project(":lib"))
+    implementation("com.google.guava:guava:33.4.5-android")
 }
