@@ -7,14 +7,14 @@ import com.google.common.graph.Traverser;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class Item {
     public String name;
     public Item parent = null;
-    public Map<String, Item> children = new HashMap<String, Item>();
+    public SortedMap<String, Item> children = new TreeMap<String, Item>();
 
     // Optional field
     public int depth = 0;

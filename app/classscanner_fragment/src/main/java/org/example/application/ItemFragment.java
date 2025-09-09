@@ -34,10 +34,9 @@ public class ItemFragment extends Fragment {
         // Create ListView programmatically
         Context context = getActivity();
         ListView listView = new ListView(context);
-        adapter = new ItemAdapter(context, item.children);
+        adapter = new ItemAdapter(context, item);
         
         listView.setAdapter(adapter);
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

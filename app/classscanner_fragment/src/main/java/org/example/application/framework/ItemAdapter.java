@@ -21,24 +21,26 @@ public class ItemAdapter extends BaseAdapter {
     
     protected Context context;
     protected Item item;
-    protected List<Item> items;
     protected LayoutInflater inflater;
     
-    public ItemAdapter(Context context, Map<String, Item> itemsMap) {
+    public ItemAdapter(Context context, Item item) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
-        this.items = new ArrayList<>(itemsMap.values());
+        this.item = item;
     }
     
     
     @Override
     public int getCount() {
-        return items.size();
+        return item.children.size();
     }
     
     @Override
     public Item getItem(int position) {
-        return items.get(position);
+        return item.children.values().stream()
+        .skip(position)
+        .findFirst()
+        .orElse(null);
     }
     
     @Override
