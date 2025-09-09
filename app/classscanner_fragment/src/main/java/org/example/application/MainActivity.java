@@ -1,6 +1,5 @@
 package org.example.application;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,10 +9,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-import android.widget.TextView;
+import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
+
+import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
@@ -24,6 +28,7 @@ import org.example.application.cmd.Cmd;
 import org.example.application.cmd.ClassScanner;
 
 import org.example.application.framework.Item;
+import org.example.application.framework.ItemAdapter;
 import org.example.application.framework.MethodItem;
 import org.example.application.framework.ClassItem;
 
@@ -34,6 +39,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "DEMO-" + MainActivity.class.getSimpleName();
 
     Item mRootItem = new Item("root");
+    FrameLayout mContainer;
 
     private void initRootItem() {
         List<Class<?>> classes = ClassScanner.findClasses(this, "org.example.application");
@@ -68,25 +74,36 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void initContainer() {
+        mContainer = new FrameLayout(this);
+        mContainer.setId(View.generateViewId()); // Generate unique ID
+        setContentView(mContainer);
+    }
+
+
+    @SuppressWarnings("deprecation")
+    private void initFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        ItemFragment fragment = new ItemFragment(mRootItem);
+        transaction.replace(mContainer.getId(), fragment);
+        transaction.commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TextView textView = new TextView(this);
-        // textView.setText("Hello world");
-        // setContentView(textView);
-
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        initContainer();
         initRootItem();
+        initFragment();
 
-        List<String> allNames = new ArrayList<>();
-        allNames.add(mRootItem.toStringAll());
-
-
-        ListView listView = new ListView(this);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allNames);
-        listView.setAdapter(adapter);
-        setContentView(listView);
+        // ListView listView = new ListView(this);
+        // ItemAdapter adapter = new ItemAdapter(this, mRootItem.children);
+        //
+        // listView.setAdapter(adapter);
+        // setContentView(listView);
 
     }
 }

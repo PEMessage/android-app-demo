@@ -18,13 +18,13 @@ public class Item {
 
     // Optional field
     public int depth = 0;
-    
+
     public Item(String name) {
         this.name = name;
     }
-    
+
     public void addChild(Item child) {
-        Preconditions.checkArgument(!children.containsKey(child.name), 
+        Preconditions.checkArgument(!children.containsKey(child.name),
             "Item with name '%s' already exists", child.name);
         child.parent = this;
 
@@ -48,7 +48,7 @@ public class Item {
         }
         current.addChild(child);
     }
-    
+
     public Iterator<Item> parentChainIterator() {
         return Traverser.<Item>forTree(item -> {
             if (item.parent != null) {
@@ -57,7 +57,7 @@ public class Item {
             return ImmutableList.of();
         }).breadthFirst(this).iterator();
     }
-    
+
     public List<Item> getPath() {
         List<Item> path = new ArrayList<>();
         parentChainIterator().forEachRemaining(v -> path.add(0,v));
