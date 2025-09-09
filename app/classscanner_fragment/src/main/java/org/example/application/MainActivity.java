@@ -28,7 +28,7 @@ import org.example.application.cmd.Cmd;
 import org.example.application.cmd.ClassScanner;
 
 import org.example.application.framework.Item;
-import org.example.application.framework.ItemAdapter;
+import org.example.application.framework.ItemUtils;
 import org.example.application.framework.MethodItem;
 import org.example.application.framework.ClassItem;
 
@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
     private void initFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        ItemFragment fragment = new ItemFragment(mRootItem);
+        ItemFragment fragment = new ItemFragment(ItemUtils.flattenSingleChildChains(mRootItem));
         transaction.replace(mContainer.getId(), fragment);
         transaction.commit();
     }
@@ -98,12 +98,6 @@ public class MainActivity extends Activity {
         initContainer();
         initRootItem();
         initFragment();
-
-        // ListView listView = new ListView(this);
-        // ItemAdapter adapter = new ItemAdapter(this, mRootItem.children);
-        //
-        // listView.setAdapter(adapter);
-        // setContentView(listView);
 
     }
 }
