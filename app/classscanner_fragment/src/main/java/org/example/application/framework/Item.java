@@ -20,6 +20,12 @@ public class Item {
     public int depth = 0;
     public int leaf = 1;
 
+
+    // Segment Tree relate
+    public int startIndex = -1;
+    public int endIndex = -1;
+    public boolean addLock = false;
+
     public Item(String name) {
         this.name = name;
     }
@@ -27,6 +33,7 @@ public class Item {
     public void addChild(Item child) {
         Preconditions.checkArgument(!children.containsKey(child.name),
             "Item with name '%s' already exists", child.name);
+        assert addLock == false;
         child.parent = this;
 
         // Before Put
@@ -107,6 +114,42 @@ public class Item {
     public String toString() {
         return "Item{name='" + name + "'}: " + String.join(".", getPathString()) 
         + " @depth=" + this.depth 
-        + " @leaf=" + this.leaf;
+        + " @leaf=" + this.leaf
+        + " @s=" + this.startIndex
+        + " @e=" + this.endIndex;
     }
+
+
+    public boolean isLeaf() {
+        return startIndex == endIndex;
+    }
+    public boolean isSegmentInited() {
+        return startIndex != -1 && endIndex != -1;
+    }
+    public void asLeaf(int index) {
+        assert !isSegmentInited();
+        assert children.size() == 0;
+        assert addLock == false;
+        startIndex = index;
+        endIndex = index;
+        addLock = true;
+    }
+    // After this call, 
+    public void initSegment() {
+        if (isSegmentInited()) {
+            return;
+        }
+        int start = Integer.MAX_VALUE;
+        int end = Integer.MIN_VALUE;
+        for (Item child : children.values()) {
+            child.initSegment();
+            assert child.isSegmentInited();
+            start = Math.min(start, child.startIndex);
+            end = Math.max(end, child.endIndex);
+        }
+        startIndex = start;
+        endIndex = end;
+        addLock = true;
+    }
+
 }

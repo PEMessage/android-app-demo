@@ -40,6 +40,7 @@ import static org.example.application.Config.TAG;
 public class MainActivity extends Activity {
 
     Item mRootItem = new Item("root");
+    List<MethodItem> methodItems = new ArrayList<>();
     FrameLayout mContainer;
 
     private void initRootItem() {
@@ -70,7 +71,10 @@ public class MainActivity extends Activity {
                 .collect(Collectors.toList());
 
             for (Method m : cmdMethods) {
-                classItem.addChild(new MethodItem(m));
+                int index = methodItems.size();
+                MethodItem mi = new MethodItem(m, index);
+                classItem.addChild(mi);
+                methodItems.add(mi);
             }
         });
     }
