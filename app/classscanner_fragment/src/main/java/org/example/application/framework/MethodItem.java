@@ -2,7 +2,7 @@ package org.example.application.framework;
 import java.lang.reflect.Method;
 
 
-public class MethodItem extends Item {
+public class MethodItem extends CommonItem {
     Method mMethod;
 
     public MethodItem(Method method) {

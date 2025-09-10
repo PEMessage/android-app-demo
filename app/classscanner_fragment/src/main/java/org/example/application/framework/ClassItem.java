@@ -1,7 +1,7 @@
 package org.example.application.framework;
 
 
-public class ClassItem extends Item {
+public class ClassItem extends CommonItem {
     Class<?> mClass;
 
     public ClassItem(Class<?> clazz) {
