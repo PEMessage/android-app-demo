@@ -35,7 +35,7 @@ public class ItemAdapter extends BaseAdapter {
     
     @Override
     public Item getItem(int position) {
-        return item.children.values().stream()
+        return (Item)item.children.values().stream()
                 .skip(position)
                 .findFirst()
                 .orElse(null);
