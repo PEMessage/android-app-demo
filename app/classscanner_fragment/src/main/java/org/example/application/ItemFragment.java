@@ -1,4 +1,5 @@
 package org.example.application;
+import android.util.Log;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ import org.example.application.framework.ItemAdapter;
 
 @SuppressWarnings("deprecation")
 public class ItemFragment extends Fragment {
+    final static String TAG = "ItemFragment";
     
     private Item item;
     private ItemAdapter adapter;
@@ -42,6 +44,10 @@ public class ItemFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Item item = adapter.getItem(position);
+                if (item.children.isEmpty()) {
+                    Log.d(TAG, item.toString() + " do not have any child, skip step into it");
+                    return;
+                }
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 ItemFragment fragment = new ItemFragment(item);
