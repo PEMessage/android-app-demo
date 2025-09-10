@@ -29,8 +29,9 @@ android {
     testOptions {
         unitTests {
             all {
+                it.outputs.upToDateWhen { false } // Even if src and test not changed, do not skip test
                 it.testLogging {
-                    showStandardStreams = true
+                    showStandardStreams = true // Even if -i option not given, still show stdout(gradlew test -i)
                 }
             }
         }

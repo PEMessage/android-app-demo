@@ -16,8 +16,9 @@ public class Item {
     public Item parent = null;
     public SortedMap<String, Item> children = new TreeMap<String, Item>();
 
-    // Optional field
+    // Extra state
     public int depth = 0;
+    public int leaf = 1;
 
     public Item(String name) {
         this.name = name;
@@ -28,12 +29,29 @@ public class Item {
             "Item with name '%s' already exists", child.name);
         child.parent = this;
 
+        // Before Put
+        // Extra state1: depth
         Traverser.<Item>forTree(item -> item.children.values())
             .breadthFirst(child)
             .forEach(item -> {
                 item.depth += this.depth + 1;
             });
+
         children.put(child.name, child);
+
+        // After Put
+        // Extra state2: leaf
+        for (Item ancestor: this.parentChain()) {
+            int prev = ancestor.leaf;
+            ancestor.leaf = 0;
+            for (Item c : this.children.values()) {
+                ancestor.leaf += c.leaf;
+            }
+            // Fast path, skip spread up
+            if (prev == ancestor.leaf) {
+                break;
+            }
+        }
     }
 
     public void addChild(Item child, String[] rpath) {
@@ -49,18 +67,18 @@ public class Item {
         current.addChild(child);
     }
 
-    public Iterator<Item> parentChainIterator() {
+    public Iterable<Item> parentChain() {
         return Traverser.<Item>forTree(item -> {
             if (item.parent != null) {
                 return ImmutableList.of(item.parent);
             }
             return ImmutableList.of();
-        }).breadthFirst(this).iterator();
+        }).breadthFirst(this);
     }
 
     public List<Item> getPath() {
         List<Item> path = new ArrayList<>();
-        parentChainIterator().forEachRemaining(v -> path.add(0,v));
+        parentChain().forEach(v -> path.add(0,v));
         return path;
     }
 
@@ -100,6 +118,8 @@ public class Item {
     }
 
     public String toString() {
-        return "Item{name='" + name + "'}: " + String.join(".", getPathString()) + ": " + this.depth;
+        return "Item{name='" + name + "'}: " + String.join(".", getPathString()) 
+        + " @depth=" + this.depth 
+        + " @leaf=" + this.leaf;
     }
 }
