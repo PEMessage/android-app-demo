@@ -54,19 +54,6 @@ public class Item {
         }
     }
 
-    public void addChild(Item child, String[] rpath) {
-        Item current = this;
-
-        for (String segment : rpath) {
-            if (!current.children.containsKey(segment)) {
-                Item newItem = new Item(segment);
-                current.addChild(newItem);
-            }
-            current = current.children.get(segment);
-        }
-        current.addChild(child);
-    }
-
     public Iterable<Item> parentChain() {
         return Traverser.<Item>forTree(item -> {
             if (item.parent != null) {

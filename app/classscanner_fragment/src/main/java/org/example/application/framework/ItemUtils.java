@@ -13,5 +13,18 @@ public class ItemUtils {
         }
         return current;
     }
+
+    static public void addChildChain(Item root, String[] rpath, Item child) {
+        Item current = root;
+
+        for (String segment : rpath) {
+            if (!current.children.containsKey(segment)) {
+                Item newItem = new Item(segment);
+                current.addChild(newItem);
+            }
+            current = current.children.get(segment);
+        }
+        current.addChild(child);
+    }
 }
 

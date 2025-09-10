@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
             String[] name = clazz.getName().split("\\.");
             String[] packageName = Arrays.copyOf(name, name.length - 1);
             ClassItem classItem = new ClassItem(clazz);
-            mRootItem.addChild(classItem, packageName);
+            ItemUtils.addChildChain(mRootItem, packageName, classItem);
 
             // For each method that has @Cmd annotaion
             List<Method> cmdMethods = Arrays.stream(clazz.getDeclaredMethods())
