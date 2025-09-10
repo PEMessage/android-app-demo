@@ -34,9 +34,10 @@ import org.example.application.framework.ClassItem;
 
 import org.example.Library;
 
+import static org.example.application.Config.TAG;
+
 
 public class MainActivity extends Activity {
-    private static final String TAG = "DEMO-" + MainActivity.class.getSimpleName();
 
     Item mRootItem = new Item("root");
     FrameLayout mContainer;

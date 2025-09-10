@@ -15,8 +15,9 @@ import dalvik.system.DexFile;
 import android.content.Context;
 import android.util.Log;
 
+import static org.example.application.Config.TAG;
+
 public class ClassScanner {
-    private static final String TAG = "DEMO-" + ClassScanner.class.getSimpleName();
 
     // See: https://stackoverflow.com/questions/7627742/is-it-possible-to-scan-the-android-classpath-for-annotations
     // See: https://mindtherobot.com/blog/737/android-hacks-scan-android-classpath/
