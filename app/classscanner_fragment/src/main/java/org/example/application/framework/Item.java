@@ -18,7 +18,6 @@ public class Item {
 
     // Extra state
     public int depth = 0;
-    public int leaf = 1;
 
 
     // Segment Tree relate
@@ -46,19 +45,6 @@ public class Item {
 
         children.put(child.name, child);
 
-        // After Put
-        // Extra state2: leaf
-        for (Item ancestor: this.parentChain()) {
-            int prev = ancestor.leaf;
-            ancestor.leaf = 0;
-            for (Item c : this.children.values()) {
-                ancestor.leaf += c.leaf;
-            }
-            // Fast path, skip spread up
-            if (prev == ancestor.leaf) {
-                break;
-            }
-        }
     }
 
     public Iterable<Item> parentChain() {
@@ -92,7 +78,7 @@ public class Item {
 
         // Use Traverser for breadth-first traversal
         Traverser.<Item>forTree(item -> item.children.values())
-            .breadthFirst(this)
+            .depthFirstPreOrder(this) // DFS instead of BFS(breadthFirst)
             .forEach(item -> {
                 // Calculate indentation based on depth
                 int depth = item.depth - this.depth;
@@ -114,7 +100,6 @@ public class Item {
     public String toString() {
         return "Item{name='" + name + "'}: " + String.join(".", getPathString()) 
         + " @depth=" + this.depth 
-        + " @leaf=" + this.leaf
         + " @s=" + this.startIndex
         + " @e=" + this.endIndex;
     }

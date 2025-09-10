@@ -77,6 +77,8 @@ public class MainActivity extends Activity {
                 methodItems.add(mi);
             }
         });
+        mRootItem.initSegment();
+        Log.i(TAG, mRootItem.toStringAll());
     }
 
     private void initContainer() {
