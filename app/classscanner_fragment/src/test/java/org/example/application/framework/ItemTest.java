@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+
 public class ItemTest {
     @Test
     public void testMain() {
@@ -18,7 +19,7 @@ public class ItemTest {
         root.addChild(pictures);
 
         Item news = new Item("news");
-        documents.addChild(news, "misc/2025-09-09".split("/"));
+        ItemUtils.addChildChain(documents, "misc/2025-09-09".split("/"), news);
 
         System.out.println(root.toStringAll());
         // assertTrue(false);
