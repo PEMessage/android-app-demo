@@ -21,6 +21,7 @@ public class Item {
 
 
     // Segment Tree relate
+    public static List<Item> leafs = new ArrayList<>(); // singleinstance of underlay index
     public int startIndex = -1;
     public int endIndex = -1;
     public boolean addLock = false;
@@ -111,12 +112,14 @@ public class Item {
     public boolean isSegmentInited() {
         return startIndex != -1 && endIndex != -1;
     }
-    public void asLeaf(int index) {
+    public void asLeaf() {
         assert !isSegmentInited();
         assert children.size() == 0;
         assert addLock == false;
+        int index = leafs.size();
         startIndex = index;
         endIndex = index;
+        leafs.add(this);
         addLock = true;
     }
     // After this call, 

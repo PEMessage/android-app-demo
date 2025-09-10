@@ -6,10 +6,10 @@ public class MethodItem extends Item {
     Method mMethod;
     boolean selected = false;
 
-    public MethodItem(Method method, int index) {
+    public MethodItem(Method method) {
         super(method.getName());
         mMethod = method;
-        super.asLeaf(index);
+        super.asLeaf();
     }
 
     public String toString() {
