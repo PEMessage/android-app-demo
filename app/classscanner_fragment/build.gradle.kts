@@ -26,9 +26,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    testOptions {
+        unitTests {
+            all {
+                it.testLogging {
+                    showStandardStreams = true
+                }
+            }
+        }
+    }
+
 }
 
 dependencies {
     implementation(project(":lib"))
     implementation("com.google.guava:guava:33.4.5-android")
+
+    testImplementation(libs.junit)
 }
