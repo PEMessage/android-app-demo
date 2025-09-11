@@ -1,6 +1,8 @@
 package org.example.application.framework;
 
 
+import com.google.common.collect.FluentIterable;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,8 @@ import org.example.application.R;
 public class ItemViewHolder extends AbstractItemViewHolder {
     LinearLayout container;
     TextView name;
-    TextView total;
     TextView success_count;
+    TextView total;
     CheckBox selected;
 
     Item item;
@@ -26,24 +28,37 @@ public class ItemViewHolder extends AbstractItemViewHolder {
         // Get references to the views
         this.container = (LinearLayout) view;
         this.name = view.findViewById(R.id.iv_name);
-        this.total = view.findViewById(R.id.iv_total);
         this.success_count = view.findViewById(R.id.iv_total);
+        this.total = view.findViewById(R.id.iv_total);
         this.selected = view.findViewById(R.id.iv_selected);
-        
-        // Additional configuration that might not be in XML
-        // selected.setClickable(true);
-        
+
         this.item = item;
+
+        selected.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            this.item.allLeaf().forEach(i -> {
+                MethodItem casted = (MethodItem)i;
+                casted.selected = isChecked;
+            });
+        });
+        
     }
 
+    @Override
     public View getView() {
         return this.container;
     }
 
+    @Override
     public void bind() {
         name.setText(item.name);
-        // You can also bind checkbox state if needed, e.g.:
-        // checkBox.setChecked(item.isChecked);
+        total.setText("/" + (item.endIndex - item.startIndex));
+        selected.setChecked(
+            FluentIterable.from(item.allLeaf())
+            .allMatch(i -> {
+                MethodItem casted = (MethodItem)i;
+                return casted.selected;
+            })
+        );
     }
 }
 
