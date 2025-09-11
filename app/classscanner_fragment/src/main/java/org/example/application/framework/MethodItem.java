@@ -23,7 +23,7 @@ public class MethodItem extends Item {
     public enum State {
         NOT_RUN,
         RUNNING,
-        PASS,
+        SUCCESS,
         FAIL;
     }
 }
