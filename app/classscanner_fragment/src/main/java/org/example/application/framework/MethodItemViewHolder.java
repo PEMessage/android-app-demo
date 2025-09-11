@@ -36,13 +36,21 @@ public class MethodItemViewHolder extends AbstractItemViewHolder {
         });
 
         container.setOnClickListener(v -> {
-            try  {
-                ClassItem classItem = (ClassItem)(item.parent);
-                Object obj = classItem.mClass.newInstance(); // TODO: do not using depercate API
-                item.mMethod.invoke(obj);
+            this.item.state = State.RUNNING;
+            bind();
+            try {
+
+                Class clazz = ((ClassItem)(this.item.parent)).mClass;
+                Object obj = clazz.newInstance(); // TODO: do not using depercate API
+                this.item.mMethod.invoke(obj);
+
+                this.item.state = State.SUCCESS;
             } catch (Exception e) {
+                this.item.state = State.FAIL;
                 e.printStackTrace();
             }
+            bind();
+
         });
     }
 
@@ -55,7 +63,20 @@ public class MethodItemViewHolder extends AbstractItemViewHolder {
     public void bind() {
         name.setText(item.name);
         selected.setChecked(item.selected);
+        container.setBackgroundColor(getColor(item.state));
     }
+
+
+    private static int getColor(State st) {
+        switch (st) {
+            case NOT_RUN: return 0x00000000;
+            case RUNNING: return 0x00000000;
+            case SUCCESS: return 0XBFACFF71;   // Green
+            case FAIL:    return 0XBFF65866;   // Red
+            default: return 0x00000000;
+        }
+    }
+
 }
 
 
