@@ -41,11 +41,8 @@ public class ItemViewHolder extends AbstractItemViewHolder {
         selected.setOnCheckedChangeListener((buttonView, isChecked) -> {
             FluentIterable.from(this.item.allLeaf())
                 .transform(MethodItem.class::cast)
-                .forEach(i -> {
-                    i.selected = isChecked;
-                });
-            });
-        
+                .forEach(i -> i.selected = isChecked);
+        });
     }
 
     @Override
@@ -56,21 +53,17 @@ public class ItemViewHolder extends AbstractItemViewHolder {
     @Override
     public void bind() {
         name.setText(item.name);
-        success_count.setText(
-            String.valueOf(
+        success_count.setText(String.valueOf(
                 StreamSupport.stream(item.allLeaf().spliterator(), false)
                     .map(MethodItem.class::cast)
                     .mapToInt(i -> i.state == State.SUCCESS ? 1 : 0)
                     .sum()
-            )
-        );
+        ));
         total.setText("/" + (item.endIndex - item.startIndex));
         selected.setChecked(
             FluentIterable.from(item.allLeaf())
-            .allMatch(i -> {
-                MethodItem casted = (MethodItem)i;
-                return casted.selected;
-            })
+            .transform(MethodItem.class::cast)
+            .allMatch(i -> i.selected)
         );
     }
 }
