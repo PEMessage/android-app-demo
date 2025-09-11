@@ -26,6 +26,9 @@ public class ItemTest {
         
         root.initSegment();
         System.out.println(root.toStringAll());
+
+        System.out.println(news.getPathString());
+        assert ItemUtils.findItemByAbsPath(root, news.getPathString()) == news;
     }
 
 }

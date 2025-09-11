@@ -28,6 +28,31 @@ public class ItemUtils {
         current.addChild(child);
     }
 
+    public static Item findItemByPath(Item item, List<String> rpath) {
+        if (item == null || rpath == null || rpath.isEmpty()) {
+            return item;
+        }
 
+        Item current = item;
+
+        for (String pathPart : rpath) {
+            if (current.children.containsKey(pathPart)) {
+                current = current.children.get(pathPart);
+            } else {
+                return null;
+            }
+        }
+
+        return current;
+    }
+
+
+    public static Item findItemByAbsPath(Item rootItem, List<String> abspath) {
+        if (rootItem == null || abspath == null || abspath.isEmpty() || abspath.get(0) != "root") {
+            return rootItem;
+        }
+
+        return findItemByPath(rootItem, abspath.subList(1, abspath.size()));
+    }
 }
 
