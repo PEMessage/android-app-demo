@@ -17,20 +17,31 @@ import android.app.FragmentTransaction;
 
 import org.example.application.framework.Item;
 import org.example.application.framework.ItemAdapter;
+import org.example.application.framework.ItemUtils;
 
 @SuppressWarnings("deprecation")
 public class ItemFragment extends Fragment {
     final static String TAG = "ItemFragment";
-    
+    final static String ARGS_ITEM_PATHS = "item_paths";
+    final static String STACK_NAME = "item_stack";
+
     private Item item;
     private ItemAdapter adapter;
 
-
-
-    public ItemFragment(Item item) {
-        this.item = item;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (getArguments() != null) {
+            MainActivity main = (MainActivity)getActivity();
+            this.item = ItemUtils.findItemByAbsPath(main.mRootItem,
+                 getArguments().getStringArrayList(ARGS_ITEM_PATHS)
+            );
+        } else {
+            assert false;
+        }
     }
-    
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Create ListView programmatically
@@ -48,12 +59,7 @@ public class ItemFragment extends Fragment {
                     Log.d(TAG, item.toString() + " do not have any child, skip step into it");
                     return;
                 }
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                ItemFragment fragment = new ItemFragment(item);
-                transaction.replace(ItemFragment.this.getId(), fragment);
-                transaction.addToBackStack("item_list");
-                transaction.commit();
+                ((MainActivity)getActivity()).navigateToItemFragment(item);
 
             }
         });

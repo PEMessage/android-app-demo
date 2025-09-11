@@ -84,15 +84,6 @@ public class MainActivity extends Activity {
     }
 
 
-    @SuppressWarnings("deprecation")
-    private void initFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        ItemFragment fragment = new ItemFragment(ItemUtils.flattenSingleChildChains(mRootItem));
-        transaction.replace(mContainer.getId(), fragment);
-        transaction.commit();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +91,30 @@ public class MainActivity extends Activity {
 
         initContainer();
         initRootItem();
-        initFragment();
+        navigateToItemFragment((ItemUtils.flattenSingleChildChains(mRootItem)), false);
+
+    }
+
+    public void navigateToItemFragment(Item item) {
+        navigateToItemFragment(item, true);
+    }
+
+    // TODO: move navigate* to standalone Class, thus, Fragment no longer depend MainActivity(Loop Dependenics)
+    @SuppressWarnings("deprecation")
+    public void navigateToItemFragment(Item item, boolean addToBackStack) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        ItemFragment fragment = new ItemFragment();
+
+        Bundle args = new Bundle();
+        args.putStringArrayList(ItemFragment.ARGS_ITEM_PATHS, new ArrayList<String>(item.getPathString()));
+        fragment.setArguments(args);
+
+        transaction.replace(mContainer.getId(), fragment);
+        if (addToBackStack) {
+            transaction.addToBackStack(ItemFragment.STACK_NAME);
+        }
+        transaction.commit();
 
     }
 }
