@@ -23,6 +23,9 @@ public class ItemTest {
 
         System.out.println(root.toStringAll());
         // assertTrue(false);
+        
+        root.initSegment();
+        System.out.println(root.toStringAll());
     }
 
 }

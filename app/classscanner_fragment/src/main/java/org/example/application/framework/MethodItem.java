@@ -9,7 +9,6 @@ public class MethodItem extends Item {
     public MethodItem(Method method) {
         super(method.getName());
         mMethod = method;
-        super.asLeaf();
     }
 
     public String toString() {

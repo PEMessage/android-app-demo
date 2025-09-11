@@ -3,6 +3,7 @@ package org.example.application.framework;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.graph.Traverser;
+import com.google.common.collect.FluentIterable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,6 +58,19 @@ public class Item {
         }).breadthFirst(this);
     }
 
+    public Iterable<Item> allChildrenDFS() {
+        return Traverser.<Item>forTree(item -> item.children.values())
+        .depthFirstPreOrder(this);
+    }
+
+    public Iterable<Item> allLeaf() {
+        if (this.isSegmentInited()) {
+            return Item.leafs.subList(this.startIndex, this.endIndex);
+        } else {
+            return FluentIterable.from(this.allChildrenDFS()).filter(item -> item.children.isEmpty());
+        }
+    }
+
     public List<Item> getPath() {
         List<Item> path = new ArrayList<>();
         parentChain().forEach(v -> path.add(0,v));
@@ -78,9 +92,7 @@ public class Item {
         StringBuilder sb = new StringBuilder();
 
         // Use Traverser for breadth-first traversal
-        Traverser.<Item>forTree(item -> item.children.values())
-            .depthFirstPreOrder(this) // DFS instead of BFS(breadthFirst)
-            .forEach(item -> {
+        this.allChildrenDFS().forEach(item -> {
                 // Calculate indentation based on depth
                 int depth = item.depth - this.depth;
                 int currentIndent = indent + (depth * 2);
@@ -107,7 +119,7 @@ public class Item {
 
 
     public boolean isLeaf() {
-        return startIndex == endIndex;
+        return (endIndex - startIndex) == 1;
     }
     public boolean isSegmentInited() {
         return startIndex != -1 && endIndex != -1;
@@ -118,19 +130,22 @@ public class Item {
         assert addLock == false;
         int index = leafs.size();
         startIndex = index;
-        endIndex = index;
+        endIndex = index + 1;
         leafs.add(this);
         addLock = true;
     }
     // After this call, 
-    public void initSegment() {
+    public void initSegment(boolean isRoot) {
         if (isSegmentInited()) {
             return;
+        }
+        if (isRoot == true) {
+            this.allLeaf().forEach(item -> item.asLeaf());
         }
         int start = Integer.MAX_VALUE;
         int end = Integer.MIN_VALUE;
         for (Item child : children.values()) {
-            child.initSegment();
+            child.initSegment(false);
             assert child.isSegmentInited();
             start = Math.min(start, child.startIndex);
             end = Math.max(end, child.endIndex);
@@ -138,6 +153,10 @@ public class Item {
         startIndex = start;
         endIndex = end;
         addLock = true;
+    }
+
+    public void initSegment() {
+        initSegment(true);
     }
 
 }
